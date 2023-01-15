@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(198, 202, 206);
+  overflow-x: hidden;
 }
 
 code {
@@ -18,8 +19,8 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   width: 100vw;
+  padding: 70px 0;
 }
 
 .game {
@@ -31,6 +32,7 @@ code {
   align-items: center;
   justify-content: center;
   padding: 10px 60px;
+  width: 70%;
 }
 
 .game button {
@@ -56,4 +58,81 @@ code {
 .game canvas {
   display: none;
   border-radius: .7rem;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.description {
+  width: 60%;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 0;
+}
+
+.description .intro {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+  font-size: 1.3rem;
+}
+
+.arrow img {
+  margin: 0 20px 0 0;
+}
+
+.plus {
+  font-size: 2rem;
+  margin: 0 20px;
+}
+
+.space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.space img {
+  width: 300px;
+}
+
+.space p {
+  font-size: 1.3rem;
+  margin: 0 20px;
+}
+
+.rules {
+  margin: 30px 0;
+}
+
+.rules h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.rules ul {
+  margin: 0 0 0 150px;
+  padding: 0;
+  font-size: 1.3rem;
+  list-style: url('/public/rocket.png');
 }

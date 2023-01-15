@@ -20,9 +20,15 @@ let ammo = 10
 let scoreText
 let enemies
 let gameover = false
+let restart = false
 function create() {
     // pause game by default
-    this.scene.pause()
+    if (!gameover) {
+        this.scene.pause()
+    }
+    if (restart) {
+        this.scene.resume()
+    }
     // use game background
     this.add.image(500, 300, 'background')
     // static platforms/images
@@ -98,7 +104,7 @@ function create() {
 let gameoverSound = new Audio('gameover.mp3')
 gameoverSound.volume = 0.8
 let reloadSound = new Audio('reload.mp3')
-reloadSound.volume = 0.8
+reloadSound.volume = 0.4
 let soundFlag = false
 let bulletsFired = 0
 let canShoot = true
@@ -230,11 +236,15 @@ function update() {
         this.add.text(375, 320, 'Press R to restart', { fontSize: '36px', fill: '#e3c30b', fontFamily: 'Arial' })
         this.input.keyboard.on('keydown', (event) => {
             if (event.keyCode === 82) {
-                this.scene.restart()
                 score = 0
                 ammo = 10
                 gameover = false
-                this.scene.resume()
+                soundFlag = false
+                restart = true
+                this.input.keyboard.off('keydown')
+                this.scene.stop()
+                this.scene.restart()
+                this.physics.resume()
             }
         })
     }
