@@ -105,10 +105,16 @@ let gameoverSound = new Audio('gameover.mp3')
 gameoverSound.volume = 0.8
 let reloadSound = new Audio('reload.mp3')
 reloadSound.volume = 0.25
+let bulletSound = new Audio('bullet-sound.mp3')
+bulletSound.volume = 0.65
+let enemyHitSound = new Audio('enemy-hit.mp3')
+enemyHitSound.volume = 0.65
 let soundFlag = false
 let bulletsFired = 0
 let canShoot = true
 let cursors
+let cooldown = 500
+let lastShotTime = 0
 function update() {
     if (!gameover) {
         // player movement
@@ -132,12 +138,14 @@ function update() {
         cursors.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         if (!gameover) {
             if (cursors.left.isDown && cursors.space.isDown) {
-                if (bulletsFired < 10 && canShoot) {
+                if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
+                    lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
                     bullet.setScale(0.09, 0.09)
                     bullet.setBounce(1)
                     bullet.setVelocityX(-400)
                     bulletsFired++
+                    bulletSound.play()
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
@@ -145,12 +153,14 @@ function update() {
                     }
                 }
             } else if (cursors.right.isDown && cursors.space.isDown) {
-                if (bulletsFired < 10 && canShoot) {
+                if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
+                    lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
                     bullet.setScale(0.09, 0.09)
                     bullet.setBounce(1)
                     bullet.setVelocityX(400)
                     bulletsFired++
+                    bulletSound.play()
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
@@ -158,12 +168,14 @@ function update() {
                     }
                 }
             } else if (cursors.up.isDown && cursors.space.isDown) {
-                if (bulletsFired < 10 && canShoot) {
+                if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
+                    lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
                     bullet.setScale(0.09, 0.09)
                     bullet.setBounce(1)
                     bullet.setVelocityY(-400)
                     bulletsFired++
+                    bulletSound.play()
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
@@ -171,12 +183,14 @@ function update() {
                     }
                 }
             } else if (cursors.down.isDown && cursors.space.isDown) {
-                if (bulletsFired < 10 && canShoot) {
+                if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
+                    lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
                     bullet.setScale(0.09, 0.09)
                     bullet.setBounce(1)
                     bullet.setVelocityY(400)
                     bulletsFired++
+                    bulletSound.play()
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
@@ -184,12 +198,14 @@ function update() {
                     }
                 }
             } else if (cursors.space.isDown) {
-                if (bulletsFired < 10 && canShoot) {
+                if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
+                    lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
                     bullet.setScale(0.09, 0.09)
                     bullet.setBounce(1)
                     bullet.setVelocityY(-400)
                     bulletsFired++
+                    bulletSound.play()
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
@@ -206,7 +222,7 @@ function update() {
             }
         })
         // enemies movement
-        if (enemies.countActive(true) < 3) {
+        if (enemies.countActive(true) < 5) {
             const x = player.x < 400 ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400)
             const enemy = enemies.create(x, 16, 'enemy')
             enemy.setBounce(1)
@@ -291,6 +307,7 @@ const hitEnemy = (player, bomb) => {
     enemies.getChildren().forEach((enemy) => {
         if (enemy.x === bomb.x && enemy.y === bomb.y) {
             enemy.disableBody(true, true)
+            enemyHitSound.play()
             score += 20
             scoreText.setText('Score: ' + score)
         }
