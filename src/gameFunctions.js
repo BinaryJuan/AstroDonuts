@@ -99,6 +99,18 @@ function create() {
     bullets = this.physics.add.group()
     this.physics.add.collider(bullets, platforms, destroyBullet, null, this)
     this.physics.add.overlap(bullets, enemies, hitEnemy, null, this)
+    // create event listener for r key using addEventListener (R)
+    document.addEventListener('keydown', (event) => {
+        if ((event.key === 'r' || event.key === 'R') && gameover) {
+            score = 0
+            ammo = 10
+            gameover = false
+            soundFlag = false
+            restart = true
+            this.scene.restart()
+            this.scene.resume()
+        }
+    })
 }
 
 let gameoverSound = new Audio('gameover.mp3')
@@ -223,46 +235,42 @@ function update() {
         })
         // enemies movement
         if (enemies.countActive(true) < 5) {
+            const randomPos = Math.random() < 0.5 ? 0 : 1
             const x = player.x < 400 ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400)
-            const enemy = enemies.create(x, 16, 'enemy')
+            let y
+            if (randomPos === 0) {
+                y = Phaser.Math.Between(0, 50)
+            } else {
+                y = Phaser.Math.Between(550, 600)
+            }
+            const enemy = enemies.create(x, y, 'enemy')
             enemy.setBounce(1)
             enemy.setCollideWorldBounds(true)
             enemy.setVelocity(Phaser.Math.Between(-1000, 1000), 100)
             enemy.setScale(0.08, 0.08)
-            enemy.setSize(enemy.width * 1.2, enemy.height * 1.2)
+            enemy.setSize(enemy.width * 1.1, enemy.height * 1.1)
             enemy.body.setCircle(30)
             this.physics.moveToObject(enemy, player, 100)
         } else {
             enemies.getChildren().forEach((enemy) => {
                 enemy.setVelocity(Phaser.Math.Between(-1000, 1000), 100)
                 enemy.setScale(0.08, 0.08)
-                enemy.setSize(enemy.width * 1.2, enemy.height * 1.2)
+                enemy.setSize(enemy.width * 1.1, enemy.height * 1.1)
                 this.physics.moveToObject(enemy, player, 100)
             })
         }
     } else {
-        this.physics.pause()
         player.setTint(0xff0000)
         player.anims.play('turn')
         if (!soundFlag) {
             gameoverSound.play()
             soundFlag = true
         }
+        // texts
         this.add.text(340, 270, 'GAME OVER', { fontSize: '36px', fill: '#ffffff', fontFamily: 'PressStart2P' })
         this.add.text(175, 320, 'Press R to restart', { fontSize: '36px', fill: '#e3c30b', fontFamily: 'PressStart2P' })
-        this.input.keyboard.on('keydown', (event) => {
-            if (event.keyCode === 82) {
-                score = 0
-                ammo = 10
-                gameover = false
-                soundFlag = false
-                restart = true
-                this.input.keyboard.off('keydown')
-                this.scene.stop()
-                this.scene.restart()
-                this.physics.resume()
-            }
-        })
+        // pause game
+        this.scene.pause()
     }
 }
 

@@ -41,7 +41,7 @@ const Game = () => {
         document.getElementById('play-button').style.display = 'none'
         document.querySelector('.descriptionContainer').style.display = 'none'
         document.querySelector('.game canvas').style.paddingBottom = '60px'
-        // ACA VA EL SOUNDTRACK
+        // ACA VA EL SOUNDTRACK (PIOVA)
     }
 
     return (
@@ -90,6 +90,7 @@ const Game = () => {
                         <li>Aliens give a score of +20</li>
                         <li>Asteroids can be used as cover</li>
                         <li>Making diagonal movements will help avoid the aliens</li>
+                        <li>After using your 10 bullets, it will take 5 seconds to reload</li>
                     </ul>
                 </div>
             </div>
