@@ -14,6 +14,11 @@ code {
     monospace;
 }
 
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('/public/fonts/PressStart2P-Regular.ttf');
+}
+
 .gameContainer {
   display: flex;
   flex-direction: column;
@@ -66,6 +71,7 @@ code {
   align-items: center;
   justify-content: center;
   margin: 15px 0;
+  font-family: 'PressStart2P';
 }
 
 .description {
@@ -135,4 +141,8 @@ code {
   padding: 0;
   font-size: 1.3rem;
   list-style: url('/public/rocket.png');
+}
+
+#play-button {
+  font-family: 'PressStart2P';
 }

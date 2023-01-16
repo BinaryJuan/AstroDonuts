@@ -54,7 +54,7 @@ const Game = () => {
                     is a game about an astronaut that has to collect all the
                     donuts in the galaxy. But be careful, there are many
                     aliens who want to kill you. Use your habilities to pilot the spaceship
-                    and collect all the donuts in the galaxy.
+                    and collect all the donuts you can.
                 </p>
                 <p className='description controls'>
                     Here is a manual on how the spaceship works:

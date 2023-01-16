@@ -104,7 +104,7 @@ function create() {
 let gameoverSound = new Audio('gameover.mp3')
 gameoverSound.volume = 0.8
 let reloadSound = new Audio('reload.mp3')
-reloadSound.volume = 0.4
+reloadSound.volume = 0.25
 let soundFlag = false
 let bulletsFired = 0
 let canShoot = true
@@ -232,8 +232,8 @@ function update() {
             gameoverSound.play()
             soundFlag = true
         }
-        this.add.text(400, 270, 'GAME OVER', { fontSize: '36px', fill: '#ffffff', fontFamily: 'Arial' })
-        this.add.text(375, 320, 'Press R to restart', { fontSize: '36px', fill: '#e3c30b', fontFamily: 'Arial' })
+        this.add.text(340, 270, 'GAME OVER', { fontSize: '36px', fill: '#ffffff', fontFamily: 'PressStart2P' })
+        this.add.text(175, 320, 'Press R to restart', { fontSize: '36px', fill: '#e3c30b', fontFamily: 'PressStart2P' })
         this.input.keyboard.on('keydown', (event) => {
             if (event.keyCode === 82) {
                 score = 0
