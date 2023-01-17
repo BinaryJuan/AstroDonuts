@@ -32,7 +32,7 @@ const Game = () => {
 
     const startGame = () => {
         new AudioContext()
-        new Audio('play.mp3').play()
+        new Audio('tracks/play.mp3').play()
         document.querySelector('.gameContainer').style.height = '100vh'
         document.querySelector('.gameContainer').style.padding = '0'
         document.querySelector('.game canvas').style.display = 'block'
@@ -45,7 +45,7 @@ const Game = () => {
 
     return (
         <div className='game'>
-            <img src='title.png' alt='Astro Donuts' />
+            <img src='images/title.png' alt='Astro Donuts' />
             <div id="game"></div>
             <div className='descriptionContainer'>
                 <p className='description intro'>
@@ -60,25 +60,25 @@ const Game = () => {
                 </p>
                 <div className='arrows'>
                     <div className='arrow'>
-                        <img src='arrow-up.png' alt='arrow up' />
+                        <img src='images/arrow-up.png' alt='arrow up' />
                         <p>Go up</p>
                     </div>
                     <div className='arrow'>
-                        <img src='arrow-right.png' alt='arrow right' />
+                        <img src='images/arrow-right.png' alt='arrow right' />
                         <p>Go right</p>
                     </div>
                     <div className='arrow'>
-                        <img src='arrow-down.png' alt='arrow down' />
+                        <img src='images/arrow-down.png' alt='arrow down' />
                         <p>Go down</p>
                     </div>
                     <div className='arrow'>
-                        <img src='arrow-left.png' alt='arrow left' />
+                        <img src='images/arrow-left.png' alt='arrow left' />
                         <p>Go left</p>
                     </div>
                 </div>
                 <p className='plus'>+</p>
                 <div className='space'>
-                    <img src='space.png' alt='space' />
+                    <img src='images/space.png' alt='space' />
                     <p>Shoot in the direction you are aiming</p>
                 </div>
                 <div className='rules'>

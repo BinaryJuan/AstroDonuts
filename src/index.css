@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(198, 202, 206);
   overflow-x: hidden;
-  background-image: url('/public/background.png');
+  background-image: url('/public/images/background.png');
 }
 
 code {
@@ -141,7 +141,7 @@ code {
   margin: 0 0 0 150px;
   padding: 0;
   font-size: 1.3rem;
-  list-style: url('/public/rocket.png');
+  list-style: url('/public/images/rocket.png');
 }
 
 #play-button {

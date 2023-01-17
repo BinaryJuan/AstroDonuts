@@ -2,14 +2,14 @@ import Phaser from 'phaser'
 
 // === MAIN GAME FUNCTIONS ===
 function preload() {
-    this.load.image('background', 'background.jpg', { flipY: true })
-    this.load.image('donut', 'donut.png', { flipY: true })
-    this.load.image('meteor', 'meteor.png', { flipY: true })
-    this.load.image('enemy', 'enemy.png', { flipY: true })
-    this.load.spritesheet('player', 'spritesheet.png',
+    this.load.image('background', 'images/background.jpg', { flipY: true })
+    this.load.image('donut', 'images/donut.png', { flipY: true })
+    this.load.image('meteor', 'images/meteor.png', { flipY: true })
+    this.load.image('enemy', 'images/enemy.png', { flipY: true })
+    this.load.spritesheet('player', 'images/spritesheet.png',
         { frameWidth: 60, frameHeight: 60, flipY: true }
     )
-    this.load.image('bullet', 'bullet.png', { flipY: true })
+    this.load.image('bullet', 'images/bullet.png', { flipY: true })
 }
 
 let player
@@ -21,7 +21,7 @@ let scoreText
 let enemies
 let gameover = false
 let restart = false
-let restartSound = new Audio('play.mp3')
+let restartSound = new Audio('tracks/play.mp3')
 function create() {
     // pause game by default
     if (!gameover) {
@@ -120,13 +120,13 @@ function create() {
     })
 }
 
-let gameoverSound = new Audio('gameover.mp3')
+let gameoverSound = new Audio('tracks/gameover.mp3')
 gameoverSound.volume = 0.8
-let reloadSound = new Audio('reload.mp3')
+let reloadSound = new Audio('tracks/reload.mp3')
 reloadSound.volume = 0.25
-let bulletSound = new Audio('bullet-sound.mp3')
+let bulletSound = new Audio('tracks/bullet-sound.mp3')
 bulletSound.volume = 0.65
-let enemyHitSound = new Audio('enemy-hit.mp3')
+let enemyHitSound = new Audio('tracks/enemy-hit.mp3')
 enemyHitSound.volume = 0.65
 let soundFlag = false
 let bulletsFired = 0
@@ -305,7 +305,7 @@ const checkOverlap = (donut, meteors) => {
     return false
 }
 
-const donutAudio = new Audio('take-donut.mp3')
+const donutAudio = new Audio('tracks/take-donut.mp3')
 donutAudio.volume = 0.6
 const collectDonuts = (player, donut) => {
     donut.disableBody(true, true)
