@@ -8,11 +8,7 @@ body {
   background-color: rgb(198, 202, 206);
   overflow-x: hidden;
   background-image: url('/public/images/background.png');
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-repeat: no-repeat;
 }
 
 @font-face {
@@ -30,9 +26,12 @@ code {
 }
 
 .game {
-  border: 8px solid rgb(65, 63, 63);
-  border-radius: .7rem;
-  background-color: #d0696a;
+  background: rgba( 208, 105, 106, 0.75 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 7.5px );
+  -webkit-backdrop-filter: blur( 7.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   display: flex;
   flex-direction: column;
   align-items: center;

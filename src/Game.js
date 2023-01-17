@@ -93,8 +93,8 @@ const Game = () => {
                     <h3>Rules</h3>
                     <ul>
                         <li>Collect all the donuts you can</li>
-                        <li>Donuts give a score of +10</li>
-                        <li>Aliens give a score of +20</li>
+                        <li>Donuts give a score of +20</li>
+                        <li>Aliens give a score of +10</li>
                         <li>Asteroids can be used as cover</li>
                         <li>Making diagonal movements will help avoid the aliens</li>
                         <li>After using your 10 bullets, it will take 5 seconds to reload</li>

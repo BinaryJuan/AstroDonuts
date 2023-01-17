@@ -315,7 +315,7 @@ donutAudio.volume = 0.6
 const collectDonuts = (player, donut) => {
     donut.disableBody(true, true)
     donutAudio.play()
-    score += 10
+    score += 20
     scoreText.setText('Score:' + score)
     if (donuts.countActive(true) === 0) {
         donuts.children.iterate(function (child) {
@@ -339,7 +339,7 @@ const hitEnemy = (player, bomb) => {
         if (enemy.x === bomb.x && enemy.y === bomb.y) {
             enemy.disableBody(true, true)
             enemyHitSound.play()
-            score += 20
+            score += 10
             scoreText.setText('Score:' + score)
         }
     })
