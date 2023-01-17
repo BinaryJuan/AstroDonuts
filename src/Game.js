@@ -28,6 +28,7 @@ const Game = () => {
         })
         const playButton = document.getElementById('play-button')
         playButton.addEventListener('click', startGame)
+        checkHighScore()
     }, [])
 
     const startGame = () => {
@@ -41,6 +42,13 @@ const Game = () => {
         document.getElementById('play-button').style.display = 'none'
         document.querySelector('.descriptionContainer').style.display = 'none'
         document.querySelector('.game canvas').style.paddingBottom = '60px'
+    }
+
+    const checkHighScore = () => {
+        const highScore = localStorage.getItem('highScore')
+        if (!highScore) {
+            localStorage.setItem('highScore', 0)
+        }
     }
 
     return (

@@ -18,6 +18,7 @@ let bullets
 let score = 0
 let ammo = 10
 let scoreText
+let highScore
 let enemies
 let gameover = false
 let restart = false
@@ -89,9 +90,10 @@ function create() {
     // take donuts
     this.physics.add.overlap(player, donuts, collectDonuts, null, this)
     // score
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '36px', fill: '#91248a', fontFamily: 'Arial' })
+    scoreText = this.add.text(16, 16, 'Score:0', { fontSize: '18px', fill: '#91248a', fontFamily: 'PressStart2P' })
+    highScore = this.add.text(16, 80, `High Score:${localStorage.getItem('highScore')}`, { fontSize: '18px', fill: '#facd50', fontFamily: 'PressStart2P' })
     // ammo
-    ammo = this.add.text(16, 50, 'Ammo: 10', { fontSize: '25px', fill: '#fc030f', fontFamily: 'Arial' })
+    ammo = this.add.text(16, 50, 'Ammo:10', { fontSize: '18px', fill: '#fc030f', fontFamily: 'PressStart2P' })
     // enemies
     enemies = this.physics.add.group()
     this.physics.add.collider(enemies, platforms)
@@ -166,7 +168,7 @@ function update() {
                     bullet.setVelocityX(-400)
                     bulletsFired++
                     bulletSound.play()
-                    ammo.setText('Ammo: ' + (10 - bulletsFired))
+                    ammo.setText('Ammo:' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
@@ -181,7 +183,7 @@ function update() {
                     bullet.setVelocityX(400)
                     bulletsFired++
                     bulletSound.play()
-                    ammo.setText('Ammo: ' + (10 - bulletsFired))
+                    ammo.setText('Ammo:' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
@@ -196,7 +198,7 @@ function update() {
                     bullet.setVelocityY(-400)
                     bulletsFired++
                     bulletSound.play()
-                    ammo.setText('Ammo: ' + (10 - bulletsFired))
+                    ammo.setText('Ammo:' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
@@ -211,7 +213,7 @@ function update() {
                     bullet.setVelocityY(400)
                     bulletsFired++
                     bulletSound.play()
-                    ammo.setText('Ammo: ' + (10 - bulletsFired))
+                    ammo.setText('Ammo:' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
@@ -226,7 +228,7 @@ function update() {
                     bullet.setVelocityY(-400)
                     bulletsFired++
                     bulletSound.play()
-                    ammo.setText('Ammo: ' + (10 - bulletsFired))
+                    ammo.setText('Ammo:' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
@@ -268,6 +270,8 @@ function update() {
             })
         }
     } else {
+        // game over
+        updateHighscore()
         player.setTint(0xff0000)
         player.anims.play('turn')
         if (!soundFlag) {
@@ -275,6 +279,7 @@ function update() {
             soundFlag = true
         }
         // texts
+        highScore.setText('High Score:' + localStorage.getItem('highScore'))
         this.add.text(340, 270, 'GAME OVER', { fontSize: '36px', fill: '#ffffff', fontFamily: 'PressStart2P' })
         this.add.text(175, 320, 'Press R to restart', { fontSize: '36px', fill: '#e3c30b', fontFamily: 'PressStart2P' })
         // pause game
@@ -311,7 +316,7 @@ const collectDonuts = (player, donut) => {
     donut.disableBody(true, true)
     donutAudio.play()
     score += 10
-    scoreText.setText('Score: ' + score)
+    scoreText.setText('Score:' + score)
     if (donuts.countActive(true) === 0) {
         donuts.children.iterate(function (child) {
             child.enableBody(true, child.x, 0, true, true)
@@ -335,7 +340,7 @@ const hitEnemy = (player, bomb) => {
             enemy.disableBody(true, true)
             enemyHitSound.play()
             score += 20
-            scoreText.setText('Score: ' + score)
+            scoreText.setText('Score:' + score)
         }
     })
 }
@@ -353,8 +358,14 @@ const resetBulletsFired = () => {
     bulletsFired = 0
     if (!gameover) {
         canShoot = true
-        ammo.setText('Ammo: ' + (10))
+        ammo.setText('Ammo:' + (10))
         reloadSound.play()
+    }
+}
+
+const updateHighscore = () => {
+    if (score > localStorage.getItem('highScore')) {
+        localStorage.setItem('highScore', score)
     }
 }
 
