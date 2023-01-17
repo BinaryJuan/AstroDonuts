@@ -41,7 +41,6 @@ const Game = () => {
         document.getElementById('play-button').style.display = 'none'
         document.querySelector('.descriptionContainer').style.display = 'none'
         document.querySelector('.game canvas').style.paddingBottom = '60px'
-        // ACA VA EL SOUNDTRACK (PIOVA)
     }
 
     return (

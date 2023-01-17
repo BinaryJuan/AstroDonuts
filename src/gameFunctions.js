@@ -21,6 +21,7 @@ let scoreText
 let enemies
 let gameover = false
 let restart = false
+let restartSound = new Audio('play.mp3')
 function create() {
     // pause game by default
     if (!gameover) {
@@ -71,12 +72,12 @@ function create() {
         repeat: 3,
         setXY: { x: 50, y: 50, stepX: 70 }
     })
-    donuts.children.iterate(function (child) {
+    donuts.children.iterate((child) => {
         child.setScale(0.03, 0.03)
         let x = Phaser.Math.Between(50, 750)
         let y = Phaser.Math.Between(50, 500)
         for (let i = 0; i < donuts.children.entries.length; i++) {
-            if (donuts.children.entries[i].x === x && donuts.children.entries[i].y === y) {
+            if ((donuts.children.entries[i].x === x && donuts.children.entries[i].y === y) || checkOverlap(child, platforms)) {
                 x = Phaser.Math.Between(50, 750)
                 y = Phaser.Math.Between(50, 500)
                 i = -1
@@ -102,13 +103,19 @@ function create() {
     // create event listener for r key using addEventListener (R)
     document.addEventListener('keydown', (event) => {
         if ((event.key === 'r' || event.key === 'R') && gameover) {
+            clearTimeout(reloadTimeout)
             score = 0
             ammo = 10
             gameover = false
             soundFlag = false
+            bulletsFired = 0
+            canShoot = true
+            cooldown = 500
+            lastShotTime = 0
             restart = true
             this.scene.restart()
             this.scene.resume()
+            restartSound.play()
         }
     })
 }
@@ -127,6 +134,7 @@ let canShoot = true
 let cursors
 let cooldown = 500
 let lastShotTime = 0
+let reloadTimeout
 function update() {
     if (!gameover) {
         // player movement
@@ -161,7 +169,7 @@ function update() {
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
-                        setTimeout(resetBulletsFired, 5000)
+                        reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
                 }
             } else if (cursors.right.isDown && cursors.space.isDown) {
@@ -176,7 +184,7 @@ function update() {
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
-                        setTimeout(resetBulletsFired, 5000)
+                        reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
                 }
             } else if (cursors.up.isDown && cursors.space.isDown) {
@@ -191,7 +199,7 @@ function update() {
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
-                        setTimeout(resetBulletsFired, 5000)
+                        reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
                 }
             } else if (cursors.down.isDown && cursors.space.isDown) {
@@ -206,7 +214,7 @@ function update() {
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
-                        setTimeout(resetBulletsFired, 5000)
+                        reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
                 }
             } else if (cursors.space.isDown) {
@@ -221,7 +229,7 @@ function update() {
                     ammo.setText('Ammo: ' + (10 - bulletsFired))
                     if (bulletsFired === 10) {
                         canShoot = false;
-                        setTimeout(resetBulletsFired, 5000)
+                        reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
                 }
             }
@@ -285,6 +293,16 @@ const randomMeteors = (difficulty, platforms) => {
         const y = Math.floor(Math.random() * (maxH - minH + 1) + minH)
         platforms.create(x, y, 'meteor').setScale(0.04, 0.04).refreshBody()
     }
+}
+
+const checkOverlap = (donut, meteors) => {
+    for (let i = 0; i < meteors.children.entries.length; i++) {
+        if (donut.x === meteors.children.entries[i].x && donut.y === meteors.children.entries[i].y) {
+            console.log('overlap')
+            return true
+        }
+    }
+    return false
 }
 
 const donutAudio = new Audio('take-donut.mp3')
