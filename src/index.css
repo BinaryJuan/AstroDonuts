@@ -8,7 +8,7 @@ body {
   background-color: rgb(198, 202, 206);
   overflow-x: hidden;
   background-image: url('/public/images/background.png');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 @font-face {
@@ -25,6 +25,80 @@ body {
   padding: 70px 0;
 }
 
+.titleDonut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.titleDonut img {
+  width: 150px;
+  transform: rotate(-10deg);
+}
+
+.titleDonut h2 {
+  font-family: 'PressStart2P';
+  font-size: 3.2rem;
+  color: #c72589;
+  user-select: none;
+  text-shadow: 
+    1px 1px 1px #511453,
+    1px 2px 1px #511453,
+    1px 3px 1px #511453,
+    1px 4px 1px #511453,
+    1px 5px 1px #511453,
+    1px 6px 1px #511453,
+    1px 7px 1px #511453,
+    1px 8px 1px #511453,
+    1px 9px 1px #511453,
+    1px 10px 1px #511453,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+  animation: neon 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+  0% {
+    text-shadow: 
+    1px 1px 1px #511453,
+    1px 2px 1px #511453,
+    1px 3px 1px #511453,
+    1px 4px 1px #511453,
+    1px 5px 1px #511453,
+    1px 6px 1px #511453,
+    1px 7px 1px #511453,
+    1px 8px 1px #511453,
+    1px 9px 1px #511453,
+    1px 10px 1px #511453,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+    color: rgb(111, 28, 114);
+  }
+  100% {
+    color: #db2b98;
+    text-shadow: 
+    1px 1px 1px #511453,
+    1px 2px 1px #511453,
+    1px 3px 1px #511453,
+    1px 4px 1px #511453,
+    1px 5px 1px #511453,
+    1px 6px 1px #511453,
+    1px 7px 1px #511453,
+    1px 8px 1px #511453,
+    1px 9px 1px #511453,
+    1px 10px 1px #511453,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+  }
+}
+
 .game {
   background: rgba( 208, 105, 106, 0.75 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -38,6 +112,8 @@ body {
   justify-content: center;
   padding: 10px 60px;
   width: 70%;
+  min-width: 1000px;
+  height: auto;
 }
 
 .game button {
@@ -72,6 +148,7 @@ body {
   justify-content: center;
   margin: 15px 0;
   font-family: 'PressStart2P';
+  color: #c9c9c9;
 }
 
 .description {

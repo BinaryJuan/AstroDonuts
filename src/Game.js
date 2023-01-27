@@ -53,7 +53,10 @@ const Game = () => {
 
     return (
         <div className='game'>
-            <img src='images/title.png' alt='Astro Donuts' />
+            <div className='titleDonut'>
+                <img src='images/donut.png' alt='Donut' />
+                <h2>Astro Donuts</h2>
+            </div>
             <div id="game"></div>
             <div className='descriptionContainer'>
                 <p className='description intro'>

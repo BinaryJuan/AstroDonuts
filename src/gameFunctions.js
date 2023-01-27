@@ -130,6 +130,8 @@ let bulletSound = new Audio('tracks/bullet-sound.mp3')
 bulletSound.volume = 0.65
 let enemyHitSound = new Audio('tracks/enemy-hit.mp3')
 enemyHitSound.volume = 0.65
+let outOfAmmoSound = new Audio('tracks/out-of-ammo.mp3')
+outOfAmmoSound.volume = 0.65
 let soundFlag = false
 let bulletsFired = 0
 let canShoot = true
@@ -173,6 +175,8 @@ function update() {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
+                } else if (!canShoot) {
+                    outOfAmmoSound.play()
                 }
             } else if (cursors.right.isDown && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
@@ -188,6 +192,8 @@ function update() {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
+                } else if (!canShoot) {
+                    outOfAmmoSound.play()
                 }
             } else if (cursors.up.isDown && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
@@ -203,6 +209,8 @@ function update() {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
+                } else if (!canShoot) {
+                    outOfAmmoSound.play()
                 }
             } else if (cursors.down.isDown && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
@@ -218,6 +226,8 @@ function update() {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
+                } else if (!canShoot) {
+                    outOfAmmoSound.play()
                 }
             } else if (cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
@@ -233,6 +243,8 @@ function update() {
                         canShoot = false;
                         reloadTimeout = setTimeout(resetBulletsFired, 5000)
                     }
+                } else if (!canShoot) {
+                    outOfAmmoSound.play()
                 }
             }
         }
