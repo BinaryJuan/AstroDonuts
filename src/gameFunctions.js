@@ -23,6 +23,10 @@ let enemies
 let gameover = false
 let restart = false
 let restartSound = new Audio('tracks/play.mp3')
+let keyA
+let keyS
+let keyD
+let keyW
 function create() {
     // pause game by default
     if (!gameover) {
@@ -120,6 +124,11 @@ function create() {
             restartSound.play()
         }
     })
+    // add WASD
+    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)
+    keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
+    keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
 }
 
 let gameoverSound = new Audio('tracks/gameover.mp3')
@@ -143,15 +152,15 @@ function update() {
     if (!gameover) {
         // player movement
         cursors = this.input.keyboard.createCursorKeys()
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown || keyA.isDown) {
             player.setVelocityX(-140)
             player.anims.play('left', true)
-        } else if (cursors.right.isDown) {
+        } else if (cursors.right.isDown || keyD.isDown) {
             player.setVelocityX(140)
             player.anims.play('right', true)
-        } else if (cursors.up.isDown) {
+        } else if (cursors.up.isDown || keyW.isDown) {
             player.setVelocityY(-140)
-        } else if (cursors.down.isDown) {
+        } else if (cursors.down.isDown || keyS.isDown) {
             player.anims.play('down')
             player.setVelocityY(140)
         } else {
@@ -161,7 +170,7 @@ function update() {
         // keyboard (bullets)
         cursors.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         if (!gameover) {
-            if (cursors.left.isDown && cursors.space.isDown) {
+            if ((cursors.left.isDown || keyA.isDown) && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
                     lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
@@ -178,7 +187,7 @@ function update() {
                 } else if (!canShoot) {
                     outOfAmmoSound.play()
                 }
-            } else if (cursors.right.isDown && cursors.space.isDown) {
+            } else if ((cursors.right.isDown || keyD.isDown) && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
                     lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
@@ -195,7 +204,7 @@ function update() {
                 } else if (!canShoot) {
                     outOfAmmoSound.play()
                 }
-            } else if (cursors.up.isDown && cursors.space.isDown) {
+            } else if ((cursors.up.isDown || keyW.isDown) && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
                     lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
@@ -212,7 +221,7 @@ function update() {
                 } else if (!canShoot) {
                     outOfAmmoSound.play()
                 }
-            } else if (cursors.down.isDown && cursors.space.isDown) {
+            } else if ((cursors.down.isDown || keyS.isDown) && cursors.space.isDown) {
                 if (bulletsFired < 10 && canShoot && Date.now() - lastShotTime > cooldown) {
                     lastShotTime = Date.now()
                     const bullet = bullets.create(player.x, player.y, 'bullet')
